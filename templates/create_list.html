@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>
+    <span class="icon fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-bars fa-stack-1x fa-inverse"></i>
+    </span>
+    Create new list</h1>
+<div class="form-group">
+<form method="POST" action="/list/new">
+    {{ form.hidden_tag() }}
+    {{ form.name(class_="new-list-input form-control", placeholder="List's name") }}
+    <br/>
+     {{ form.comment(class_="new-list-comment form-control", placeholder="A comment") }}
+    <br/>
+    {{ form.submit(class_="btn btn-default") }}
+</form>
+</div>
+{% endblock %}
