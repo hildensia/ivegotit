@@ -9,10 +9,13 @@ import datetime
 import argparse
 import sys
 
+import config
+
 app = flask.Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/ivegotit.db'
-app.config['SECRET_KEY'] = 'not so safe but convenient'
+app.config['SQLALCHEMY_DATABASE_URI'] = config.db_url
+app.config['SECRET_KEY'] = config.secret_key
 db = SQLAlchemy(app)
+application = app
 
 
 class GIList(db.Model):
