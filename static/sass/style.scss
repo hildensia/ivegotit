@@ -1,0 +1,140 @@
+$main-color: #fc0;
+$verylightgray: #f5f5f5;
+
+$gotit: green;
+$dontneed: gray;
+
+$text-color: lightgray;
+
+body {
+  padding-top: 50px;
+  background-color: lighten($verylightgray, 7%);
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.content {
+  display: block;
+  max-width: 600px;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border-radius: 20px;
+
+  padding: 3em 4em 4em 4em;
+  border: 1pt solid lightgray;
+  background-color: $verylightgray;
+  color: gray;
+  h1 {
+    margin-top: 0px;
+    font-size: 3em;
+    .icon {
+      font-size: 1em;
+      color: $main-color;
+      margin-left: -2.38em;
+      margin-top: -.1em;
+    }
+  }
+  .time  {
+    color: lightgray;
+    margin-left: .1em;
+    padding-left: .1em;
+    margin-right: .1em;
+    padding-right: .1em;
+  }
+  .list-id {
+    color: lightgray;
+    margin-left: .1em;
+    padding-left: .1em;
+    margin-right: .1em;
+    padding-right: .1em;
+  }
+
+}
+
+.list-entries {
+  list-style-type: none;
+  list-style-position: inside;
+  margin-left: .1em;
+  padding-left: .1em;
+  margin-right: .1em;
+  padding-right: .1em;
+  li {
+    heigth: 1.2em;
+    border-radius: 5px;
+    background-color: $main-color;
+    margin-top: 4px;
+    margin-bottom: 4px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: .4em;
+    border: 1pt solid gray;
+  }
+
+  form {
+    display: inline;
+    overflow: hidden;
+  }
+  .list-button {
+    background-color: $main-color;
+    border: none;
+    border-left: 1pt solid gray;
+    border-right: 1pt solid gray;
+    height: 100%;
+    color: white;
+    float: right;
+    margin-right: 4px;
+  }
+  .marker {
+    width: 1.2em;
+    text-align: center;
+    float: right;
+    margin-right: 4px;
+    margin-top: 2px;
+    margin-bottom: auto;
+  }
+  a {
+    color: gray;
+  }
+  .gotit {
+    background-color: $gotit;
+    color: lighten(lightgray, 10%);
+    a {
+      color: lighten(lightgray, 10%);
+    }
+  }
+  .dontneed {
+    background-color: $dontneed;
+    color: lighten(lightgray, 10%);
+    text-decoration: line-through;
+    a {
+      $link-color: lighten(lightgray, 10%);
+      color: $link-color;
+    }
+  }
+  .add-entry {
+    padding: 0;
+    border: none;
+  }
+}
+.add-field{
+  color: gray;
+  border-color: gray;
+  border-radius: 5px;
+}
+.add-button {
+  color: gray;
+  border-radius: 5px;
+  border-color: gray;
+}
+
+.footer {
+  color: lightgray;
+  text-align: center;
+}
+textarea.form-control {
+  height: 10em;
+}
+
