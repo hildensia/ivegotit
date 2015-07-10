@@ -180,4 +180,5 @@ if __name__ == '__main__':
         sys.exit()
 
     else:
+        create_database()
         app.run(debug=True)
