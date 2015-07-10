@@ -1,0 +1,109 @@
+body {
+  padding-top: 50px;
+  background-color: white;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.content {
+  display: block;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border-radius: 20px;
+  padding: 3em 4em 4em 4em;
+  border: 1pt solid lightgray;
+  background-color: #f5f5f5;
+  color: gray; }
+  .content h1 {
+    margin-top: 0px;
+    font-size: 3em; }
+    .content h1 .icon {
+      font-size: 1em;
+      color: #fc0;
+      margin-left: -2.38em;
+      margin-top: -.1em; }
+  .content .time {
+    color: lightgray;
+    margin-left: .1em;
+    padding-left: .1em;
+    margin-right: .1em;
+    padding-right: .1em; }
+  .content .list-id {
+    color: lightgray;
+    margin-left: .1em;
+    padding-left: .1em;
+    margin-right: .1em;
+    padding-right: .1em; }
+
+.list-entries {
+  list-style-type: none;
+  list-style-position: inside;
+  margin-left: .1em;
+  padding-left: .1em;
+  margin-right: .1em;
+  padding-right: .1em; }
+  .list-entries li {
+    heigth: 1.2em;
+    border-radius: 5px;
+    background-color: #fc0;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .4em;
+    border: 1pt solid gray; }
+  .list-entries form {
+    display: inline;
+    overflow: hidden; }
+  .list-entries .list-button {
+    background-color: #fc0;
+    border: none;
+    border-left: 1pt solid gray;
+    border-right: 1pt solid gray;
+    height: 100%;
+    color: white;
+    float: right;
+    margin-right: 4px; }
+  .list-entries .marker {
+    width: 1.2em;
+    text-align: center;
+    float: right;
+    margin-right: 4px;
+    margin-top: 2px;
+    margin-bottom: auto; }
+  .list-entries a {
+    color: gray; }
+  .list-entries .gotit {
+    background-color: green;
+    color: #ececec; }
+    .list-entries .gotit a {
+      color: #ececec; }
+  .list-entries .dontneed {
+    background-color: gray;
+    color: #ececec;
+    text-decoration: line-through; }
+    .list-entries .dontneed a {
+      color: #ececec; }
+  .list-entries .add-entry {
+    padding: 0;
+    border: none; }
+
+.add-field {
+  color: gray;
+  border-color: gray;
+  border-radius: 5px; }
+
+.add-button {
+  color: gray;
+  border-radius: 5px;
+  border-color: gray; }
+
+.footer {
+  color: lightgray;
+  text-align: center; }
+
+textarea.form-control {
+  height: 10em; }
+
+/*# sourceMappingURL=style.css.map */
