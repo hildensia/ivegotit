@@ -28,7 +28,7 @@ class GIList(db.Model):
 
     def __init__(self):
         self.time = datetime.datetime.now()
-        self.id = random.getrandbits(32)
+        self.id = random.getrandbits(30)
 
 
 class GIListForm(Form):
