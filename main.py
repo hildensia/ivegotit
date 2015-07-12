@@ -28,7 +28,7 @@ class GIList(db.Model):
 
     def __init__(self):
         self.time = datetime.datetime.now()
-        self.id = random.getrandbits(48)
+        self.id = random.getrandbits(40)
 
 
 class GIListForm(Form):
@@ -88,11 +88,7 @@ def new_list():
         print('object populated')
         db.session.add(gi_list)
         print('database add')
-        try:
-            db.session.commit()
-        except:
-
-            traceback.print_tb()
+        db.session.commit()
         print('database commit')
         return flask.redirect('/list/{}'.format(gi_list.id))
 
