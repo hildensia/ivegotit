@@ -1,15 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>
-    I've got it.
+            <span class="icon fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+            </span>
+    I've got it.<br>
+    <small>Simply manage group activities.</small>
 </h1>
-<p>Simply manage group activities. <a href="/list/create">Create a list.</a></p>
 
-<p>Open a list:
+<p>Did you ever wanted to organize a small BBQ and had to send around houndreds
+of mails to organize who brings what? Ever wanted to last-minute send you flat mate
+that he should bring milk from the groceries? <i>I've got it</i> makes it easy. Just create
+a list, share the ID and keep everybody updated on who brings what. No registration needed.
+It's dead simple.</p>
+
+<p><a href="/list/create">Create a new list.</a></p>
+
+<p>
 <form method="POST" action="/list/open">
     <div class="input-group">
-    {{ form.hidden_tag() }}
     {{ form.gi_list(class_="form-control", placeholder="Open:ID", autofocus=true) }}
+    {{ form.hidden_tag() }}
     <span class="input-group-btn">
         <button class="btn btn-default " type="submit"><i class="fa fa-search"></i></button>
     </span>

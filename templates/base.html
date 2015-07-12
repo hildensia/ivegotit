@@ -32,8 +32,8 @@
             </ul>
             <form class="navbar-form navbar-right" role="search" method="POST" action="/list/open">
                 <div class="input-group">
-                    {{ open_form.hidden_tag() }}
                     {{ open_form.gi_list(size=30, class_="form-control ", placeholder="Open:ID") }}
+                    {{ open_form.hidden_tag() }}
     <span class="input-group-btn">
         <button class="btn btn-default " type="submit"><i class="fa fa-search"></i></button>
     </span>
