@@ -21,14 +21,14 @@ application = app
 
 
 class GIList(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     name = db.Column(db.String(100))
     time = db.Column(db.DateTime)
     comment = db.Column(db.Text)
 
     def __init__(self):
         self.time = datetime.datetime.now()
-        self.id = random.getrandbits(40)
+        self.id = random.getrandbits(48)
 
 
 class GIListForm(Form):
@@ -39,7 +39,7 @@ class GIListForm(Form):
 
 class GIEntry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    gi_list = db.Column(db.Integer, db.ForeignKey('gi_list.id'),
+    gi_list = db.Column(db.BigInteger, db.ForeignKey('gi_list.id'),
                         primary_key=True)
     entry = db.Column(db.String(100))
     gotit = db.Column(db.Boolean)
