@@ -14,7 +14,7 @@ import os
 import config
 
 app = flask.Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = config.db_url
 app.config['SECRET_KEY'] = config.secret_key
 db = SQLAlchemy(app)
 application = app
