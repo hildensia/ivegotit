@@ -10,7 +10,7 @@ import argparse
 import sys
 
 import os
-
+import traceback
 import config
 
 app = flask.Flask(__name__)
@@ -88,7 +88,11 @@ def new_list():
         print('object populated')
         db.session.add(gi_list)
         print('database add')
-        db.session.commit()
+        try:
+            db.session.commit()
+        except:
+
+            traceback.print_tb()
         print('database commit')
         return flask.redirect('/list/{}'.format(gi_list.id))
 
