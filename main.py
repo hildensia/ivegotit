@@ -79,12 +79,15 @@ def create_list():
 
 @app.route("/list/new", methods=[u'POST'])
 def new_list():
+    print('create a new list')
     form = GIListForm()
     if form.validate_on_submit():
+        print('form is validate')
         gi_list = GIList()
         form.populate_obj(gi_list)
         db.session.add(gi_list)
         db.session.commit()
+        print('database commit')
         return flask.redirect('/list/{}'.format(gi_list.id))
 
     return flask.redirect('/list/create')
