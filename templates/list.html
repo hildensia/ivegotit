@@ -1,62 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>
+<h1>
             <span class="icon fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-bars fa-stack-1x fa-inverse"></i>
             </span>
-        {{ gi_list.name}}</h1>
-	<p class="time">{{ gi_list.time }}</p>
-    <p class="list-id">List ID: {{gi_list.id }}</p>
-	<p class="comment">{{ gi_list.comment }}</p>
-	<ul class="list-entries">
-		{% for entry in gi_entries %}
-		  {% if entry.gotit %}
-        <li class="gotit">
-            {% elif entry.dontneed %}
-        <li class="dontneed">
-        {% else %}
-            <li>
-        {%endif%}
-              {{ entry.entry }}
-        {% if entry.gotit %}
-        <span class="marker fa fa-check"></span>
-        {% elif entry.dontneed%}
-        <span class="marker fa fa-minus"></span>
-        {% endif %}
-              {% if not entry.gotit and not entry.dontneed %}
-        <a href="/entry/gotit/{{ gi_list.id }}/{{entry.id}}"><span class="marker fa fa-check"></span></a>
-        <a href="/entry/dontneed/{{ gi_list.id }}/{{entry.id}}"><span class="marker fa fa-minus"></span></a>
-        <a href="/entry/rm/{{ gi_list.id }}/{{entry.id}}"><span class="marker fa fa-close"></span></a>
-              {% else %}
-              <a href="/entry/reset/{{ gi_list.id }}/{{entry.id}}"><span class="marker fa fa-undo"></span></a>
-              {% endif %}
-		  </li>
-	  {% endfor %}
-        <li class="add-entry">
-
-
-            <form method="POST" action="/entry/new">
-                {{ new_entry_form.hidden_tag() }}
-                {{ new_entry_form.gi_list }}
-                <div class="input-group">
-                {{ new_entry_form.entry(class_="add-field form-control", autofocus=true, placeholder="Add...") }}
+    {{ gi_list.name}}</h1>
+<p class="time">{{ gi_list.time }}</p>
+<p class="list-id">List ID: {{gi_list.id }}</p>
+<p class="comment">{{ gi_list.comment }}</p>
+<ul class="list-entries">
+    {%- for entry in gi_entries %}
+    {% include 'list_entry.html' %}
+    {%- endfor %}
+    <li class="add-entry" id="add-entry">
+        <form action="javascript:addEntry('{{gi_list.id}}', $('#newentry').val())">
+            {{ new_entry_form.hidden_tag() }}
+            {{ new_entry_form.gi_list }}
+            <div class="input-group">
+                {{ new_entry_form.entry(class_="add-field form-control", id="newentry", autofocus=true, placeholder="Add...") }}
                 <span class="input-group-btn">
-                    <button class="btn btn-default add-button" type="submit"><i class="fa fa-plus-square"></i></button>
+                    <button class="btn btn-default add-button" type="button"><i class="fa fa-plus-square"></i></button>
                 </span>
-                </div>
-            </form>
+            </div>
+        </form>
 
 
-        </li>
-	</ul>
-</div>
-<div class="content panel ">
-    <h1>
-            <span class="icon fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-comments fa-stack-1x fa-inverse"></i>
-            </span> Comments
-    </h1>
-    <div id="disqus_thread"></div>
+    </li>
+</ul>
+
+<script src="{{ url_for('static', filename='js/entries.js') }}"></script>
+{% include "disqus.html" %}
 {%endblock%}

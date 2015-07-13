@@ -95,18 +95,6 @@ def new_list():
     return flask.redirect('/list/create')
 
 
-@app.route("/entry/reset/<list_id>/<entry_id>")
-def reset_entry(list_id, entry_id):
-    entry = (GIEntry.query
-             .filter_by(gi_list=list_id)
-             .filter_by(id=entry_id).first())
-    entry.gotit = False
-    entry.dontneed = False
-    db.session.commit()
-
-    return flask.redirect('/list/{}'.format(list_id))
-
-
 @app.route("/list/open", methods=[u'POST'])
 def open_list():
     form = OpenForm()
@@ -128,49 +116,72 @@ def shopping_list(list_id):
                                  open_form=open_form)
 
 
-@app.route("/entry/new", methods=[u'POST'])
+@app.route("/entry/add", methods=[u'POST'])
 def new_entry():
     form = GIEntryForm()
     list_id = form.gi_list.data
-    if form.validate_on_submit():
-        gi_entry = GIEntry(list_id)
-        form.populate_obj(gi_entry)
-        db.session.add(gi_entry)
-        db.session.commit()
-    return flask.redirect('/list/{}'.format(list_id))
+    gi_list = GIList.query.filter_by(id=list_id).first()
+    gi_entry = GIEntry(list_id)
+    form.populate_obj(gi_entry)
+    db.session.add(gi_entry)
+    db.session.commit()
+    return flask.jsonify({'html': flask.render_template("list_entry.html",
+                                                        entry=gi_entry,
+                                                        gi_list=gi_list),
+                          'entry_id': gi_entry.id})
 
 
-@app.route("/entry/gotit/<list_id>/<entry_id>")
-def gotit_get(list_id, entry_id):
+@app.route("/entry/gotit", methods=[u'POST'])
+def gotit():
     entry = (GIEntry.query
-             .filter_by(gi_list=list_id)
-             .filter_by(id=entry_id).first())
+             .filter_by(gi_list=flask.request.form['gi_list'])
+             .filter_by(id=flask.request.form['entry_id']).first())
+    gi_list = GIList.query.filter_by(id=flask.request.form['gi_list']).first()
     entry.gotit = True
     db.session.commit()
 
-    return flask.redirect('/list/{}'.format(list_id))
+    return flask.jsonify({'html': flask.render_template("list_entry.html",
+                                                        entry=entry,
+                                                        gi_list=gi_list)})
 
 
-@app.route("/entry/dontneed/<list_id>/<entry_id>")
-def dontneed_get(list_id, entry_id):
+@app.route("/entry/dontneed", methods=[u'POST'])
+def dontneed_entry():
     entry = (GIEntry.query
-             .filter_by(gi_list=list_id)
-             .filter_by(id=entry_id).first())
+             .filter_by(gi_list=flask.request.form['gi_list'])
+             .filter_by(id=flask.request.form['entry_id']).first())
+    gi_list = GIList.query.filter_by(id=flask.request.form['gi_list']).first()
     entry.dontneed = True
     db.session.commit()
 
-    return flask.redirect('/list/{}'.format(list_id))
+    return flask.jsonify({'html': flask.render_template("list_entry.html",
+                                                        entry=entry,
+                                                        gi_list=gi_list)})
 
 
-@app.route("/entry/rm/<list_id>/<entry_id>")
-def remove_entry(list_id, entry_id):
+@app.route("/entry/reset", methods=[u'POST'])
+def reset_entry():
     entry = (GIEntry.query
-             .filter_by(gi_list=list_id)
-             .filter_by(id=entry_id).first())
-    db.session.delete(entry)
+             .filter_by(gi_list=flask.request.form['gi_list'])
+             .filter_by(id=flask.request.form['entry_id']).first())
+    gi_list = GIList.query.filter_by(id=flask.request.form['gi_list']).first()
+    entry.dontneed = False
+    entry.gotit = False
     db.session.commit()
 
-    return flask.redirect('/list/{}'.format(list_id))
+    return flask.jsonify({'html': flask.render_template("list_entry.html",
+                                                        entry=entry,
+                                                        gi_list=gi_list)})
+
+
+@app.route("/entry/rm", methods=[u'POST'])
+def remove_entry():
+    entry = (GIEntry.query
+             .filter_by(gi_list=flask.request.form['gi_list'])
+             .filter_by(id=flask.request.form['entry_id']).first())
+    db.session.delete(entry)
+    db.session.commit()
+    return flask.jsonify({'text': 'True'})
 
 
 def create_database():
@@ -180,11 +191,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--createdb", help="Creates the initial database.",
                         action="store_true")
+    parser.add_argument("--debug", help="Runs the app in the debugger mode.",
+                        action="store_true")
     args = parser.parse_args()
 
     if args.createdb:
         create_database()
         sys.exit()
-
-    else:
+    elif args.debug:
         app.run(debug=True)
+    else:
+        app.run(debug=False)
