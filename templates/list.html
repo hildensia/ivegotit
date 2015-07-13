@@ -9,7 +9,7 @@
 <p class="time">{{ gi_list.time }}</p>
 <p class="list-id">List ID: {{gi_list.id }}</p>
 <p class="comment">{{ gi_list.comment }}</p>
-<ul class="list-entries">
+<ul class="list-entries" id="list-entries">
     {%- for entry in gi_entries %}
     {% include 'list_entry.html' %}
     {%- endfor %}
@@ -18,7 +18,7 @@
             {{ new_entry_form.hidden_tag() }}
             {{ new_entry_form.gi_list }}
             <div class="input-group">
-                {{ new_entry_form.entry(class_="add-field form-control", id="newentry", autofocus=true, placeholder="Add...") }}
+                {{ new_entry_form.entry(class_="add-field form-control", id="newentry", autofocus=true, maxlength=100, placeholder="Add...") }}
                 <span class="input-group-btn">
                     <button class="btn btn-default add-button" type="button"><i class="fa fa-plus-square"></i></button>
                 </span>
@@ -28,7 +28,6 @@
 
     </li>
 </ul>
-
 <script src="{{ url_for('static', filename='js/entries.js') }}"></script>
 {% include "disqus.html" %}
 {%endblock%}

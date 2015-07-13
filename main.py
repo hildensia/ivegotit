@@ -70,6 +70,12 @@ def index():
     return flask.render_template("index.html", form=form, open_form=form)
 
 
+@app.route("/impressum")
+def impressum():
+    form = OpenForm()
+    return flask.render_template("impressum.html", open_form=form)
+
+
 @app.route("/list/create")
 def create_list():
     form = GIListForm()
