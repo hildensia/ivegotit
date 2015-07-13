@@ -52,7 +52,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding: .4em;
-    border: 1pt solid gray; }
+    border: 1pt solid gray;
+    overflow: hidden; }
   .list-entries form {
     display: inline;
     overflow: hidden; }
