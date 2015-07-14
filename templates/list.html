@@ -8,7 +8,7 @@
     {{ gi_list.name}}</h1>
 <p class="time">{{ gi_list.time }}</p>
 <p class="list-id">List ID: {{gi_list.id }}</p>
-<p class="comment">{{ gi_list.comment }}</p>
+<pre class="comment">{{ gi_list.comment }}</pre>
 <ul class="list-entries" id="list-entries">
     {%- for entry in gi_entries %}
     {% include 'list_entry.html' %}
