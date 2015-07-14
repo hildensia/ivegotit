@@ -34,6 +34,8 @@ body {
     padding-left: .1em;
     margin-right: .1em;
     padding-right: .1em; }
+  .content .comment {
+    white-space: pre-wrap; }
 
 .list-entries {
   list-style-type: none;
