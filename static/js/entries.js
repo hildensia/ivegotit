@@ -6,7 +6,11 @@ function removeEntry(list_id, entry_id) {
         gi_list: list_id,
         entry_id: entry_id
     }).done(function(removedEntry) {
-        $('#entry' + entry_id).slideUp();
+        //$('#wait').hide();
+        //$('#add-sign').show();
+        $('#entry' + entry_id).slideUp(function() {
+            $('#entry' + entry_id).remove();
+        });
     }).fail(function() { });
 }
 
