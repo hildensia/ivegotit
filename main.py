@@ -10,12 +10,11 @@ import argparse
 import sys
 
 import os
-import traceback
 import config
 
 app = flask.Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = config.db_url
-app.config['SECRET_KEY'] = config.secret_key
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ('DATABASE_URL')
+app.config['SECRET_KEY'] = os.environ('SECRET')
 db = SQLAlchemy(app)
 application = app
 
@@ -47,7 +46,10 @@ class GIEntry(db.Model):
 
     def __init__(self, gi_list):
         # get all list entries, count them, make id = number + 1
-        self.id = len(GIEntry.query.filter_by(gi_list=gi_list).all())
+        try:
+            self.id = GIEntry.query.filter_by(gi_list=gi_list).all()[-1].id + 1
+        except IndexError:
+            self.id = 0
         self.gotit = False
         self.dontneed = False
 
